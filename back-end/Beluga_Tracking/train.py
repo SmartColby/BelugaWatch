@@ -27,6 +27,7 @@ if __name__ == "__main__":  # Ensures safe multiprocessing
     # Tracking results
     cap = cv2.VideoCapture(0)  # Open video capture
     TRACKER_PATH = "tracker.yaml"  # Define tracker path
+
     fourcc = cv2.VideoWriter_fourcc(*'XVID')  # Define codec
     out = cv2.VideoWriter('output.avi', fourcc, 20.0, (640, 480))  # Initialize video writer
 
