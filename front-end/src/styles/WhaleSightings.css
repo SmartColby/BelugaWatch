@@ -1,0 +1,72 @@
+/* Sightings Section */
+.sightings {
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #1abc9c, #00bcd4); /* Marine-inspired gradient */
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+/* Sightings List */
+.sightings-list {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Slightly more spacing between each item */
+}
+
+/* Sightings Paragraph */
+.sightings-list p {
+    background: rgba(255, 255, 255, 0.85); /* Lighter transparency for cleaner look */
+    padding: 15px;
+    border-radius: 12px;
+    margin: 0;
+    width: 90%; /* Slightly smaller width */
+    max-width: 650px; /* Larger width for better readability */
+    font-size: 1.2rem; /* Slightly bigger text */
+    font-weight: 500;
+    color: #2c3e50; /* Deep contrasting color for text */
+    text-align: left;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sightings-list p:hover {
+    transform: translateY(-8px); /* More noticeable hover lift */
+    background-color: #b2ebf2; /* Soft light blue hover */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* More intense shadow on hover */
+}
+
+/* Add subtle border animation for extra flair */
+.sightings-list p::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: #1abc9c; /* Bright accent color */
+    margin-top: 12px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sightings-list p:hover::after {
+    opacity: 1;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .sightings {
+        padding: 40px 15px;
+    }
+
+    .sightings-list {
+        gap: 15px; /* Slightly tighter gap for smaller screens */
+    }
+
+    .sightings-list p {
+        width: 100%; /* Full width for mobile */
+    }
+}
+

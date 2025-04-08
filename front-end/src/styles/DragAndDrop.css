@@ -1,0 +1,77 @@
+.drag-and-drop-container {
+  text-align: center;
+  padding: 20px;
+  background: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.drag-and-drop-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #004d40;
+}
+
+.drag-and-drop-terms {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.draggable-term {
+  padding: 10px 15px;
+  background: #ffffff;
+  border: 2px solid #004d40;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #004d40;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.draggable-term:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.drag-and-drop-targets {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.droppable-target {
+  width: 150px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #004d40;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.drag-and-drop-results {
+  margin-top: 20px;
+}
+
+.drag-and-drop-results h3 {
+  font-size: 1.5rem;
+  color: #004d40;
+}
+
+.drag-and-drop-results ul {
+  list-style: none;
+  padding: 0;
+}
+
+.drag-and-drop-results li {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 5px;
+}

@@ -1,0 +1,98 @@
+/* Tracking Map Section */
+.tracking-map {
+    padding: 80px 20px; /* Increased padding for better spacing */
+    background: #eef7fa; /* A softer, lighter blue tone for a calming marine effect */
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    max-width: 1200px;
+    margin: 0 auto; /* Centers the section */
+    transition: background-color 0.3s ease-in-out;
+}
+
+.tracking-map:hover {
+    background-color: #d9f1f8; /* Slightly darker blue when hovered */
+}
+
+/* Map Placeholder Styling */
+.map-placeholder {
+    width: 100%;
+    height: 350px; /* Slightly taller placeholder for better user experience */
+    background: #d3d3d3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px; /* Increased font size for better readability */
+    font-weight: 700;
+    color: #333; /* Darker text for better contrast */
+    border-radius: 12px; /* Rounded corners */
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* Add subtle hover effect to placeholder */
+.map-placeholder:hover {
+    transform: scale(1.05); /* Slight zoom effect */
+    background-color: #b0c4de; /* Soft background color change on hover */
+}
+
+/* Map Placeholder Text */
+.map-placeholder span {
+    font-size: 22px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adds depth to the text */
+}
+
+/* Mobile Optimization */
+@media (max-width: 1024px) {
+    .tracking-map {
+        padding: 60px 15px; /* Less padding for smaller screens */
+    }
+
+    .map-placeholder {
+        height: 300px; /* Reduce height for mobile view */
+        font-size: 18px; /* Smaller text size */
+    }
+}
+
+@media (max-width: 768px) {
+    .tracking-map {
+        padding: 50px 10px; /* Less padding for tighter viewports */
+    }
+
+    .map-placeholder {
+        height: 250px; /* Slightly shorter height */
+        font-size: 16px; /* Smaller text size */
+    }
+}
+
+@media (max-width: 480px) {
+    .tracking-map {
+        padding: 40px 10px; /* Compact padding for very small screens */
+    }
+
+    .map-placeholder {
+        height: 220px; /* Compact placeholder for very small screens */
+        font-size: 14px; /* Smaller font for tiny screens */
+    }
+}
+
+/* Season Filter Styling */
+.season-filter {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.season-filter label {
+  font-size: 1rem;
+  margin-right: 0.5rem;
+}
+
+.season-filter select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+

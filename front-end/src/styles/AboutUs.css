@@ -1,0 +1,218 @@
+/* Overall Page Styling */
+.about-us {
+    background: linear-gradient(to bottom right, #00bcd4, #004d40); /* Beluga-inspired gradient */
+    color: #ffffff;
+    text-align: center;
+    padding: 100px 20px 50px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Heading Styling */
+.about-us h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 2s ease-out;
+}
+
+/* Code Input Box Styling */
+.about-us input {
+    width: 320px;
+    padding: 12px;
+    margin-top: 20px;
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+    background-color: #004d40; /* Dark teal background */
+    color: #ffffff;
+    font-size: 1.2rem;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 188, 212, 0.3); /* Soft glowing effect */
+}
+
+.about-us input:focus {
+    border-color: #00bcd4; /* Light blue border on focus */
+    background-color: #00332e; /* Darker teal background on focus */
+    outline: none;
+    box-shadow: 0 0 20px rgba(0, 188, 212, 0.5); /* Glowing effect on focus */
+}
+
+.about-us input::placeholder {
+    color: #b2dfdb; /* Light teal placeholder text */
+}
+
+/* Introduction Paragraph Styling */
+.intro {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
+    color: #b2dfdb;
+    animation: fadeIn 2s ease-out 0.5s;
+}
+
+/* Team Section Styling */
+.team {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 30px 0;
+}
+
+/* Individual Team Member Card Styling */
+.team-member {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    max-width: 300px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(10px);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover Effects on Team Member Cards */
+.team-member:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.team-member:hover::before {
+    opacity: 1;
+}
+
+.team-member::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.2));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Team Member Photo Styling */
+.member-photo {
+    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 5px solid #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.team-member:hover .member-photo {
+    transform: scale(1.05);
+}
+
+/* Team Member Name Styling */
+.team-member h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #ffffff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Team Member Role Styling */
+.team-member h3 {
+    font-size: 1.2rem;
+    color: #b2dfdb;
+    margin-bottom: 15px;
+}
+
+/* Team Member Bio Styling */
+.team-member p {
+    font-size: 1rem;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+/* Canvas Styling */
+#gameCanvas {
+    border: 2px solid #000000; /* Black border */
+    background-color: #ffffff; /* White background */
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+/* Background Beluga Whale Animation */
+@keyframes swim {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.beluga-animation {
+    position: absolute;
+    bottom: 10%;
+    left: -10%;
+    width: 200px;
+    opacity: 0.1;
+    animation: swim 20s linear infinite;
+    z-index: -1;
+}
+
+/* Fade-In Animation */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+    .about-us {
+        padding: 80px 10px 40px;
+    }
+
+    .about-us h1 {
+        font-size: 2.5rem;
+    }
+
+    .intro {
+        font-size: 1rem;
+    }
+
+    .team-member {
+        max-width: 90%;
+    }
+
+    .team {
+        gap: 20px;
+        padding: 20px 0;
+    }
+}
+
+/* Footer Section Styling */
+.footer {
+    background: #004d40;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 1rem;
+    margin-top: 60px;
+}
+
+/* Footer Links Styling */
+.footer a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    margin: 0 10px;
+}
+
+.footer a:hover {
+    color: #80deea;
+}

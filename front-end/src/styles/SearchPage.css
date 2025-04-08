@@ -1,0 +1,182 @@
+/* SearchPage.css */
+
+/* Main container for the search page */
+.search-page {
+    font-family: 'Poppins', sans-serif;
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding-top: 120px; /* Push content below navbar */
+    background-color: #1F4C6B; /* Soft ocean blue */
+    border-radius: 15px;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+/* Header */
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 3px;
+    animation: fadeIn 1s ease-out;
+}
+
+/* Container for search results */
+.results-container {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #0B2A3B; /* Deep ocean color */
+    border-radius: 15px;
+    border: 2px solid #00B0D6; /* Light cyan border */
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 2s ease-out;
+}
+
+/* Individual search result styling */
+.search-result {
+    border: 1px solid #00B0D6;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #2F3E4E; /* Darker shade for results */
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect for search results */
+.search-result:hover {
+    transform: scale(1.03); /* Slight zoom effect */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Title inside the search result */
+.search-result h2 {
+    font-size: 1.8rem;
+    color: #00B0D6;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Paragraph text inside search results */
+.search-result p {
+    font-size: 1.1rem;
+    color: #B0B0B0;
+    line-height: 1.6;
+}
+
+/* Link inside the result */
+.search-result a {
+    font-size: 1.1rem;
+    color: #00B0D6;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+/* Hover effect for links */
+.search-result a:hover {
+    color: #fff;
+}
+
+/* Error message styling */
+.error-message {
+    color: #FF5733;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Search button styling */
+.search-bar-container {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    width: 100%;
+    margin-top: 30px;
+}
+
+/* Search icon inside the button */
+.search-button-icon {
+    font-size: 24px;
+    color: white;
+}
+
+/* Expanded state of the search button */
+.search-button.expanded {
+    width: 300px;
+    padding: 12px 25px;
+    border-radius: 50px;
+}
+
+/* Search input field */
+.search-input {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 50px;
+    outline: none;
+    width: 180px;
+    background-color: #fff;
+    color: #333;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Placeholder text */
+.search-input::placeholder {
+    color: #888;
+}
+
+/* Search input focus/hover styles */
+.search-input:focus,
+.search-input:hover {
+    border: 2px solid #00B0D6;
+}
+
+
+
+/* Smooth fade-in effect for header */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .search-button {
+        width: 50px;
+        height: 50px;
+    }
+
+    .search-button.expanded {
+        width: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .search-button {
+        width: 45px;
+        height: 45px;
+    }
+
+    .search-button.expanded {
+        width: 230px;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-button {
+        width: 40px;
+        height: 40px;
+    }
+
+    .search-button.expanded {
+        width: 200px;
+    }
+}

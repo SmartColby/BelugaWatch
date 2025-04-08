@@ -1,0 +1,129 @@
+# Node.js dependencies
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build files
+dist/
+build/
+out/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Video files
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# CSV and data files
+*.csv
+*.json
+
+# Image files
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.svg
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# IDE files
+.vscode/
+*.code-workspace
+.idea/
+*.iml
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*.bak
+
+# Coverage reports
+coverage/
+*.lcov
+
+# Dependency directories
+/.pnp
+.pnp.js
+
+# Test files
+*.test.js
+*.test.jsx
+*.spec.js
+*.spec.jsx
+
+# Generated files
+*.lock
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# FFmpeg temporary files
+*.ffmpeg
+*.ffmetadata
+
+# Miscellaneous
+*.log.*
+*.orig
+*.rej
+
+# Temporary directories
+tmp/
+temp/
+
+# Python virtual environments
+venv/
+env/
+*.venv
+
+# Compiled files
+*.o
+*.out
+*.class
+
+# Backup files
+*.bak
+*.swp
+*.swo
+*.~*
+
+# Yarn and npm debug files
+.yarn/
+.yarnrc
+.pnpm-debug.log
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# JetBrains IDEs
+*.ipr
+*.iws
+
+# MacOS-specific files
+.AppleDouble
+.LSOverride
+
+# Windows-specific files
+Thumbs.db
+ehthumbs.db

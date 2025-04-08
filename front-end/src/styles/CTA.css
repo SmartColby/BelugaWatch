@@ -1,0 +1,72 @@
+/* Call-to-Action Section */
+.cta {
+    padding: 80px 20px; /* Increased padding for a more spacious feel */
+    text-align: center;
+    background: linear-gradient(135deg, #6ec1e4, #3a7f82); /* Soft gradient matching marine theme */
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); /* Adds depth */
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* CTA Section Hover Effect */
+.cta:hover {
+    background: linear-gradient(135deg, #2c6b72, #4d9ab7); /* Inverted gradient for hover effect */
+    transform: scale(1.02); /* Slight scale effect on hover for interactivity */
+}
+
+/* CTA Button */
+.cta-button {
+    background: #e74c3c;
+    color: white;
+    padding: 15px 30px; /* More spacious button */
+    border: none;
+    border-radius: 50px; /* Fully rounded corners for a modern look */
+    font-size: 1.2rem; /* Larger text for better readability */
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    font-weight: bold;
+}
+
+/* CTA Button Hover Effects */
+.cta-button:hover {
+    transform: scale(1.1); /* Bigger scale for more impact */
+    background: #c0392b; /* Darker red for hover */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25); /* Stronger shadow on hover */
+}
+
+/* Mobile Optimization */
+@media (max-width: 1024px) {
+    .cta {
+        padding: 70px 15px; /* Less padding for smaller screens */
+    }
+
+    .cta-button {
+        padding: 14px 28px; /* Slightly smaller button */
+    }
+}
+
+@media (max-width: 768px) {
+    .cta {
+        padding: 60px 10px; /* Compact padding for small devices */
+    }
+
+    .cta-button {
+        padding: 12px 24px; /* Smaller padding on mobile */
+        font-size: 1.1rem; /* Adjust font size */
+    }
+}
+
+@media (max-width: 480px) {
+    .cta {
+        padding: 50px 10px; /* Minimal padding for tiny screens */
+    }
+
+    .cta-button {
+        padding: 10px 20px; /* Compact button on mobile */
+        font-size: 1rem; /* Smaller text for mobile */
+    }
+}
