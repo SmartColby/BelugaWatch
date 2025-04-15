@@ -1,0 +1,162 @@
+/* Container for the entire video upload section */
+.video-upload-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+  color: #ffffff;
+  background: linear-gradient(to bottom, #004d40, #00796b); /* Oceanic gradient */
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add animated beluga shapes in the background */
+.video-upload-container::before,
+.video-upload-container::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 0;
+  animation: float 6s ease-in-out infinite;
+}
+
+.video-upload-container::before {
+  width: 300px;
+  height: 300px;
+  top: -50px;
+  left: -50px;
+}
+
+.video-upload-container::after {
+  width: 400px;
+  height: 400px;
+  bottom: -50px;
+  right: -50px;
+  animation-delay: 3s;
+}
+
+/* Upload Section */
+.upload-section {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: linear-gradient(135deg, #80deea, #4dd0e1); /* Light blue gradient */
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 1;
+}
+
+.upload-section .title {
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin-bottom: 10px;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.upload-section .subtitle {
+  font-size: 1.2rem;
+  color: #e0f7fa;
+  margin-bottom: 20px;
+}
+
+.upload-section .file-input {
+  display: block;
+  margin: 10px auto 20px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.upload-section .file-input:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  transform: scale(1.05);
+}
+
+.upload-section .upload-button {
+  background-color: #00acc1; /* Teal for buttons */
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.upload-section .upload-button:hover {
+  background-color: #00838f; /* Darker teal on hover */
+  transform: translateY(-2px);
+}
+
+.upload-section .upload-button.disabled {
+  background-color: #b2ebf2; /* Light teal for disabled buttons */
+  cursor: not-allowed;
+}
+
+/* Video Display Section */
+.video-display-section {
+  margin-top: 30px;
+}
+
+.video-display-section .section-title {
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-align: center;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.video-display-section .video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.video-display-section .video-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.video-display-section .video-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.video-display-section .video-card h4 {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.video-display-section .video-player {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+}

@@ -1,0 +1,111 @@
+/* General Reset for Consistency */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  font-family: 'Roboto', sans-serif;  /* A clean, readable font */
+  line-height: 1.6;  /* Slightly larger line spacing for readability */
+  font-size: 16px;  /* Base font size for consistency */
+  background-color: #f4f7f8;  /* Light background color for easy reading */
+  color: #333;  /* Dark text color for contrast */
+  height: 100%;  /* Ensure the page uses full height */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+  color: inherit; /* Links inherit color from surrounding text */
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+a:hover {
+  color: #2a7f89; /* Beluga Whale-inspired blue on hover */
+  transform: scale(1.05);
+}
+
+ul {
+  list-style: none; /* Remove default list style */
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+input, textarea, select {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Utility classes for spacing and layout */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto; /* Centers content */
+  padding: 20px; /* Adds padding inside container */
+}
+
+/* Accessibility-focused styles */
+:focus {
+  outline: 3px solid #2a7f89; /* Focus indicator for better accessibility */
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #2a7f89;
+  border-radius: 5px;
+}
+
+/* Body Background and Visual Appeal */
+body {
+  background-color: #eaf2f5; /* Soft light blue background */
+}
+
+/* Add a basic box shadow to main sections for depth */
+.section {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+/* Make content look clean and professional */
+img {
+  max-width: 100%;
+  display: block;
+  height: auto;
+}
+
+/* Styling the footer */
+footer {
+  background-color: #2a7f89;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px; /* Adjust font size for mobile */
+  }
+
+  .container {
+    width: 100%;  /* Full-width for small screens */
+    padding: 10px; /* Adjust padding for mobile */
+  }
+}
+

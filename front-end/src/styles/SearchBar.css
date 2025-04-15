@@ -1,0 +1,113 @@
+/* Search Button Container */
+.search-bar-container {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  width: 100%; /* Ensure the container takes the full width */
+  margin-top: 10px; /* Reduced margin to move the button slightly up */
+  align-items: center; /* Align the button vertically */
+}
+
+/* Search Button (Initial State - Small) */
+.search-button {
+  background-color: #e74c3c;
+  border: none;
+  padding: 8px 12px; /* Smaller padding */
+  border-radius: 50%;
+  cursor: pointer;
+  transition: width 0.3s ease-in-out, padding 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px; /* Button starts small */
+  height: 40px; /* Equal height for circular shape */
+  margin-top: -5px; /* Adjusted to align horizontally with other elements */
+}
+
+/* Search Button Icon (Initial State - Small) */
+.search-button-icon {
+  font-size: 18px; /* Icon size */
+  color: white;
+}
+
+/* Expanded State - Full Button with Search Form */
+.search-button.expanded {
+  width: 250px; /* Expands to the full width */
+  border-radius: 50px; /* Rounded corners when expanded */
+  padding: 8px 20px; /* More padding when expanded */
+}
+
+/* Search Form Inside Button (Initially Hidden) */
+.search-form {
+  display: none; /* Hidden by default */
+  align-items: center;
+  justify-content: space-between;
+  width: 100%; /* Takes up the full space inside the button */
+}
+
+/* When Button is Expanded, Show Form */
+.search-button.expanded .search-form {
+  display: flex; /* Makes the form visible when expanded */
+}
+
+/* Search Input (Inside the Expanded Button) */
+.search-input {
+  padding: 7px 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 50px;
+  outline: none;
+  width: 180px; /* Expanded input */
+  background-color: #fff;
+  color: #333;
+}
+
+/* Search Input - Placeholder Text */
+.search-input::placeholder {
+  color: #aaa;
+}
+
+/* Search Input Focused or Hovered */
+.search-input:focus,
+.search-input:hover {
+  border: 2px solid #e74c3c;
+}
+
+/* Button Hover (Small) */
+.search-button:hover {
+  background-color: #c0392b;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .search-button {
+    width: 35px;
+    height: 35px;
+  }
+
+  .search-button.expanded {
+    width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .search-button {
+    width: 30px;
+    height: 30px;
+  }
+
+  .search-button.expanded {
+    width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-button {
+    width: 30px;
+    height: 30px;
+  }
+
+  .search-button.expanded {
+    width: 150px;
+  }
+}
