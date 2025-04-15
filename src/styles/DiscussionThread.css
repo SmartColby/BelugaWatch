@@ -1,0 +1,40 @@
+.discussion-thread {
+  margin-left: 270px; /* Adjust for sidebar */
+  padding: 20px;
+}
+
+.comment {
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.comment:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.comment-author {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.comment-content {
+  margin-top: 10px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.reply-button {
+  margin-top: 10px;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+}
+
+.reply-button:hover {
+  background-color: var(--hover-color);
+}

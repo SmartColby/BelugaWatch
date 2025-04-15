@@ -1,0 +1,8 @@
+/* BelugaGame.css */
+canvas {
+    background-color: #000000; /* Black background for high contrast */
+    border: 2px solid #FFFFFF; /* White border for clear visibility */
+    display: block;
+    margin: 0 auto;
+  }
+  

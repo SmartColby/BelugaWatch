@@ -1,0 +1,185 @@
+/* 🌊 Auth Page Background with Floating Bubbles */
+.auth-page {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #0097a7, #004d40); /* Ocean gradient */
+    overflow: hidden;
+}
+
+/* 🔵 Bubble Styling */
+.bubble {
+    position: absolute;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1)); /* Gradient bubbles */
+    border-radius: 50%;
+    animation: floatUp linear infinite;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    opacity: 0.8;
+}
+
+/* Individual Bubble Sizes and Animations */
+.bubble:nth-child(1) {
+    width: 50px;
+    height: 50px;
+    left: 10%;
+    animation-duration: 8s;
+    animation-delay: 0s;
+}
+.bubble:nth-child(2) {
+    width: 70px;
+    height: 70px;
+    left: 30%;
+    animation-duration: 10s;
+    animation-delay: 1s;
+}
+.bubble:nth-child(3) {
+    width: 60px;
+    height: 60px;
+    left: 50%;
+    animation-duration: 12s;
+    animation-delay: 2s;
+}
+.bubble:nth-child(4) {
+    width: 80px;
+    height: 80px;
+    left: 70%;
+    animation-duration: 15s;
+    animation-delay: 3s;
+}
+.bubble:nth-child(5) {
+    width: 40px;
+    height: 40px;
+    left: 90%;
+    animation-duration: 9s;
+    animation-delay: 4s;
+}
+
+/* 🌊 Floating Animation */
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) scale(1); /* Start below the viewport */
+        opacity: 0.5; /* Slightly transparent */
+    }
+    50% {
+        opacity: 0.8; /* Become more visible mid-way */
+    }
+    100% {
+        transform: translateY(-10vh) scale(1.2); /* Float above the viewport and grow slightly */
+        opacity: 0; /* Fade out */
+    }
+}
+
+/* 🔹 Auth Container */
+.auth-page .auth-container {
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 30px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1)); /* Glassmorphism effect */
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.5);
+    text-align: center;
+    animation: fadeInUp 0.6s ease-out;
+    position: relative;
+    z-index: 1;
+}
+
+/* 🐳 Cool Heading */
+.auth-page .auth-container h2 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #ffffff; /* White text */
+    text-shadow: 2px 2px 10px rgba(0, 191, 255, 0.8); /* Glowing effect */
+    animation: pulse 2s infinite ease-in-out;
+}
+
+/* 🔹 Form Styling */
+.auth-page .auth-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 🌊 Input Fields */
+.auth-page .auth-container input {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    background: linear-gradient(145deg, #ffffff, #e0f7fa); /* Subtle gradient */
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 188, 212, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+.auth-page .auth-container input:focus {
+    outline: none;
+    border: 2px solid #00bcd4; /* Aqua highlight */
+    box-shadow: 0px 0px 12px rgba(0, 188, 212, 0.8), inset 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* 🌟 Buttons */
+.auth-page .auth-container button {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #00bcd4, #0097a7); /* Aqua gradient */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2), inset 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+.auth-page .auth-container button:hover {
+    background: linear-gradient(135deg, #007c91, #005f73); /* Darker aqua */
+    box-shadow: 0px 6px 15px rgba(0, 188, 212, 0.6), inset 0 0 8px rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+/* 💡 Error Message */
+.auth-page .auth-container p {
+    color: #ff1744; /* Bright red for errors */
+    font-weight: bold;
+    margin-top: 10px;
+    animation: shake 0.5s ease-in-out;
+}
+
+/* 🔥 Subtle Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        text-shadow: 2px 2px 10px rgba(0, 191, 255, 0.8);
+    }
+    50% {
+        text-shadow: 2px 2px 15px rgba(0, 191, 255, 1);
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    75% {
+        transform: translateX(5px);
+    }
+}

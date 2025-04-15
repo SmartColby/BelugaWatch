@@ -1,0 +1,84 @@
+.features {
+    padding: 80px 30px;
+    text-align: center;
+    background: #e0f7fa;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Title Styling - Keeping original size */
+.features h2 {
+    font-size: 24px; /* Original title size */
+    color: #2c3e50;
+    margin-bottom: 40px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.features h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 5px;
+    background: #1abc9c; /* Accent color */
+    border-radius: 5px;
+}
+
+.feature-list {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.feature {
+    background: linear-gradient(145deg, #a8e0e9, #6ab7c7);
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+    width: 320px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    position: relative;
+}
+
+/* Adding pop-out effect to the whale in all features */
+.feature::before {
+    content: "🐋"; /* Beluga whale emoji */
+    font-size: 55px;
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #1abc9c;
+    opacity: 0.7;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.feature {
+    transform: translateY(-10px) rotate(-5deg) scale(1.2); /* All whales pop out initially */
+}
+
+.feature:hover {
+    transform: translateY(-12px) rotate(-5deg) scale(1.25); /* Hover effect with more intensity */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+    background-color: #80deea;
+}
+
+.feature:nth-child(odd)::before {
+    content: "🐋"; /* Another beluga whale for variation */
+    font-size: 55px;
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #1abc9c;
+    opacity: 0.7;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
