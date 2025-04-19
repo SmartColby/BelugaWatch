@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/VideoUpload.css";
 
@@ -7,8 +7,8 @@ export default function VideoUpload() {
   const [uploading, setUploading] = useState(false);
   const [originalVideoUrl, setOriginalVideoUrl] = useState(null);
   const [trackingVideoUrl, setTrackingVideoUrl] = useState(null);
-  const [behaviorVideoUrl, setBehaviorVideoUrl] = useState(null);
   const [trackingDataUrl, setTrackingDataUrl] = useState(null);
+  const [progress, setProgress] = useState(null); // Progress state
 
   const handleFileChange = (event) => {
     setVideoFile(event.target.files[0]);
@@ -31,14 +31,31 @@ export default function VideoUpload() {
       setOriginalVideoUrl(`http://localhost:5000${uploadedVideoPath}`);
       console.log("Original Video URL:", `http://localhost:5000${uploadedVideoPath}`);
 
+      // Open WebSocket connection for progress updates
+      const ws = new WebSocket("ws://localhost:5000/progress");
+      ws.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        console.log("Progress update received:", data); // Debugging log
+        setProgress(data); // Update progress state
+      };
+
       // Process video for tracking
-      const trackingResponse = await axios.post("http://localhost:5000/api/process-tracking", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+      const trackingResponse = await axios.post("http://localhost:5000/api/process-tracking", {
+        videoPath: uploadedVideoPath,
       });
-      setTrackingVideoUrl(`http://localhost:5000${trackingResponse.data.trackingVideoPath}`);
-      setTrackingDataUrl(`http://localhost:5000${trackingResponse.data.trackingDataPath}`);
-      console.log("Tracking Video URL:", `http://localhost:5000${trackingResponse.data.trackingVideoPath}`);
-      console.log("Tracking Data URL:", `http://localhost:5000${trackingResponse.data.trackingDataPath}`);
+
+      if (!trackingResponse.data.trackingVideoPath || !trackingResponse.data.trackingDataPath) {
+        console.error("Tracking video or data path not returned by backend.");
+        alert("Failed to retrieve tracking video or data. Please try again.");
+        return;
+      }
+
+      const trackingVideoPath = trackingResponse.data.trackingVideoPath;
+      const trackingDataPath = trackingResponse.data.trackingDataPath;
+      setTrackingVideoUrl(`http://localhost:5000${trackingVideoPath}`);
+      setTrackingDataUrl(`http://localhost:5000${trackingDataPath}`);
+      console.log("Tracking Video URL:", `http://localhost:5000${trackingVideoPath}`);
+      console.log("Tracking Data URL:", `http://localhost:5000${trackingDataPath}`);
     } catch (error) {
       console.error("Error uploading or processing video:", error);
       alert("Failed to process video. Please try again.");
@@ -67,6 +84,16 @@ export default function VideoUpload() {
         </button>
       </div>
 
+      {progress && (
+        <div className="progress-section">
+          <h3>Processing Progress</h3>
+          <p>
+            Frame {progress.currentFrame} of {progress.totalFrames} (
+            {progress.percentage.toFixed(2)}%)
+          </p>
+        </div>
+      )}
+
       {originalVideoUrl && (
         <div className="video-display-section">
           <h3 className="section-title">Your Videos</h3>
@@ -83,11 +110,6 @@ export default function VideoUpload() {
                 className="video-player"
                 onError={(e) => console.error("Error loading video:", e.target.error)}
               />
-              {console.log("Tracking Video URL State:", trackingVideoUrl)}
-            </div>
-            <div className="video-card">
-              <h4>Behavior Annotated</h4>
-              <video controls src={behaviorVideoUrl} className="video-player" />
             </div>
           </div>
         </div>

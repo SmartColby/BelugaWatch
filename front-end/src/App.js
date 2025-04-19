@@ -37,7 +37,7 @@ function App() {
     <Router>
       <div>
         {/* Navbar is included */}
-        <Navbar />
+        <Nav />
 
         {/* Define Routes */}
         <Routes>
