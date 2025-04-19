@@ -734,8 +734,8 @@ module.exports = function (webpackEnv) {
         }),
       !disableESLintPlugin &&
         new ESLintPlugin({
-          // Plugin options
-          extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
+          extensions: ['js', 'jsx'],
+          emitWarning: true, // Ensure warnings are emitted
           formatter: require.resolve('react-dev-utils/eslintFormatter'),
           eslintPath: require.resolve('eslint'),
           failOnError: !(isEnvDevelopment && emitErrorsAsWarnings),
@@ -761,5 +761,10 @@ module.exports = function (webpackEnv) {
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
     performance: false,
+    watch: true,
+    watchOptions: {
+      poll: 1000, // Check for changes every second
+      ignored: /node_modules/, // Ignore changes in node_modules
+    },
   };
 };

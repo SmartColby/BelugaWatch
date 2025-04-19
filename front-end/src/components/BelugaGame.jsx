@@ -15,14 +15,18 @@ const BelugaGame = () => {
   const [score, setScore] = useState(0);
   const [lives, setLives] = useState(3);
   const [marineFact, setMarineFact] = useState(null);
+  const [level, setLevel] = useState(1);
+  const [difficulty, setDifficulty] = useState("Easy");
+  const [invincible, setInvincible] = useState(false);
 
   const canvasWidth = 800;
   const canvasHeight = 600;
-  const gridSize = 60; // Increased size for all sprites
+  const gridSize = 60;
   const belugaRef = useRef({ x: 0, y: 0, width: gridSize, height: gridSize });
   const fishRef = useRef([]);
   const trashRef = useRef([]);
   const threatsRef = useRef([]);
+  const powerUpsRef = useRef([]);
   const safeZones = [
     { x: 0, y: 0, width: gridSize * 2, height: gridSize * 2 },
     { x: canvasWidth - gridSize * 2, y: canvasHeight - gridSize * 2, width: gridSize * 2, height: gridSize * 2 },
@@ -37,6 +41,17 @@ const BelugaGame = () => {
     "Climate change threatens beluga habitats."
   ];
 
+  const handleDifficultyChange = (level) => setDifficulty(level);
+
+  const adjustDifficulty = () => {
+    const settings = {
+      Easy: [10, 3, 2],
+      Medium: [15, 5, 3],
+      Hard: [20, 7, 5]
+    };
+    generateItems(...settings[difficulty]);
+  };
+
   const resetGame = () => {
     setGameStarted(true);
     setGameOver(false);
@@ -44,122 +59,149 @@ const BelugaGame = () => {
     setScore(0);
     setLives(3);
     setMarineFact(null);
+    setLevel(1);
+    setInvincible(false);
     belugaRef.current = { x: 0, y: 0, width: gridSize, height: gridSize };
-    generateItems();
+    adjustDifficulty();
+    generatePowerUps();
   };
 
-  const generateItems = () => {
-    // Generate fish (energy pickups)
-    fishRef.current = Array.from({ length: 10 }, () => ({
-      x: Math.floor(Math.random() * (canvasWidth / gridSize)) * gridSize,
-      y: Math.floor(Math.random() * (canvasHeight / gridSize)) * gridSize,
-      type: "fish",
-    }));
+  const generateItems = (fishCount, trashCount, threatCount) => {
+    const randCoord = () => Math.floor(Math.random() * (canvasWidth / gridSize)) * gridSize;
 
-    // Generate trash (hazards)
-    trashRef.current = Array.from({ length: 5 }, () => ({
-      x: Math.floor(Math.random() * (canvasWidth / gridSize)) * gridSize,
-      y: Math.floor(Math.random() * (canvasHeight / gridSize)) * gridSize,
-      type: "trash",
-    }));
+    fishRef.current = Array.from({ length: fishCount }, () => ({ x: randCoord(), y: randCoord(), type: "fish" }));
+    trashRef.current = Array.from({ length: trashCount }, () => ({ x: randCoord(), y: randCoord(), type: "trash" }));
 
-    // Generate threats (boats)
-    threatsRef.current = Array.from({ length: 3 }, () => ({
+    threatsRef.current = Array.from({ length: threatCount }, () => ({
+      x: randCoord(),
+      y: randCoord(),
+      direction: Math.random() > 0.5 ? "horizontal" : "vertical",
+      speed: Math.random() > 0.5 ? gridSize / 6 : -gridSize / 6,
+      width: gridSize,
+      height: gridSize
+    }));
+  };
+
+  const generatePowerUps = () => {
+    powerUpsRef.current = Array.from({ length: 2 }, () => ({
       x: Math.floor(Math.random() * (canvasWidth / gridSize)) * gridSize,
       y: Math.floor(Math.random() * (canvasHeight / gridSize)) * gridSize,
-      direction: Math.random() > 0.5 ? "horizontal" : "vertical", // Randomize direction
-      speed: Math.random() > 0.5 ? gridSize / 6 : -gridSize / 6, // Reduced speed
+      type: Math.random() > 0.5 ? "invincibility" : "speed",
     }));
   };
 
   const handleKeyDown = (e) => {
-    const beluga = belugaRef.current;
     if (gameOver || gameWon) return;
+    const beluga = belugaRef.current;
 
-    if (e.key === "w") beluga.y = Math.max(beluga.y - gridSize, 0); // Move up
-    if (e.key === "s") beluga.y = Math.min(beluga.y + gridSize, canvasHeight - gridSize); // Move down
-    if (e.key === "a") beluga.x = Math.max(beluga.x - gridSize, 0); // Move left
-    if (e.key === "d") beluga.x = Math.min(beluga.x + gridSize, canvasWidth - gridSize); // Move right
+    const movement = {
+      w: () => (beluga.y = Math.max(beluga.y - gridSize, 0)),
+      s: () => (beluga.y = Math.min(beluga.y + gridSize, canvasHeight - gridSize)),
+      a: () => (beluga.x = Math.max(beluga.x - gridSize, 0)),
+      d: () => (beluga.x = Math.min(beluga.x + gridSize, canvasWidth - gridSize)),
+    };
 
+    if (movement[e.key]) movement[e.key]();
     checkCollisions();
+    checkPowerUpCollisions();
   };
+
+  const handleHealthReduction = () => {
+    if (!isInSafeZone(belugaRef.current) && !invincible) {
+      setLives((prev) => {
+        const newLives = prev - 1;
+        if (newLives <= 0) setGameOver(true);
+        return newLives;
+      });
+    }
+  };
+
+  const isColliding = (a, b) =>
+    a.x < b.x + b.width &&
+    a.x + a.width > b.x &&
+    a.y < b.y + b.height &&
+    a.y + a.height > b.y;
 
   const checkCollisions = () => {
     const beluga = belugaRef.current;
 
-    // Check collision with fish
     fishRef.current = fishRef.current.filter((fish) => {
-      if (beluga.x === fish.x && beluga.y === fish.y) {
+      if (isColliding(beluga, { ...fish, width: gridSize, height: gridSize })) {
         setScore((prev) => prev + 10);
-        return false; // Remove the fish after collection
+        return false;
       }
       return true;
     });
 
-    // Check collision with trash
     trashRef.current = trashRef.current.filter((trash) => {
-      if (beluga.x === trash.x && beluga.y === trash.y) {
-        if (!isInSafeZone(beluga)) {
-          setLives((prev) => prev - 1); // Reduce lives
-          if (lives - 1 === 0) {
-            setGameOver(true); // End the game if lives reach 0
-          }
-        }
-        return false; // Remove the trash after collision
+      if (isColliding(beluga, { ...trash, width: gridSize, height: gridSize })) {
+        handleHealthReduction();
+        return false;
       }
       return true;
     });
 
-    // Check collision with threats (boats)
     threatsRef.current.forEach((threat) => {
-      if (beluga.x === threat.x && beluga.y === threat.y && !isInSafeZone(beluga)) {
-        setLives((prev) => prev - 1); // Reduce lives
-        if (lives - 1 === 0) {
-          setGameOver(true); // End the game if lives reach 0
-        }
+      if (isColliding(beluga, threat)) {
+        handleHealthReduction();
       }
     });
 
-    // Check if all fish are collected
     if (fishRef.current.length === 0) {
-      setGameWon(true); // Player wins if all fish are collected
+      setGameWon(true);
     }
   };
 
-  const isInSafeZone = (entity) => {
-    return safeZones.some(
-      (zone) =>
-        entity.x >= zone.x &&
-        entity.x < zone.x + zone.width &&
-        entity.y >= zone.y &&
-        entity.y < zone.y + zone.height
-    );
+  const checkPowerUpCollisions = () => {
+    const beluga = belugaRef.current;
+
+    powerUpsRef.current = powerUpsRef.current.filter((powerUp) => {
+      if (isColliding(beluga, { ...powerUp, width: gridSize, height: gridSize })) {
+        if (powerUp.type === "invincibility") {
+          setInvincible(true);
+          setTimeout(() => setInvincible(false), 5000);
+        }
+        return false;
+      }
+      return true;
+    });
   };
+
+  const isInSafeZone = (entity) =>
+    safeZones.some((zone) =>
+      isColliding(entity, zone)
+    );
 
   const moveThreats = () => {
     threatsRef.current.forEach((threat) => {
-      // Randomly switch direction
-      if (Math.random() < 0.01) { // 1% chance per frame to switch direction
+      if (Math.random() < 0.01) {
         threat.direction = threat.direction === "horizontal" ? "vertical" : "horizontal";
       }
 
-      // Move horizontally
       if (threat.direction === "horizontal") {
         threat.x += threat.speed;
-        if (threat.x <= 0 || threat.x >= canvasWidth - gridSize) {
-          threat.speed *= -1; // Reverse direction when hitting canvas edges
-        }
-      }
-
-      // Move vertically
-      if (threat.direction === "vertical") {
+        if (threat.x <= 0 || threat.x >= canvasWidth - gridSize) threat.speed *= -1;
+      } else {
         threat.y += threat.speed;
-        if (threat.y <= 0 || threat.y >= canvasHeight - gridSize) {
-          threat.speed *= -1; // Reverse direction when hitting canvas edges
-        }
+        if (threat.y <= 0 || threat.y >= canvasHeight - gridSize) threat.speed *= -1;
       }
     });
   };
+
+  const nextLevel = () => {
+    setLevel((prev) => prev + 1);
+    adjustDifficulty();
+    generatePowerUps();
+    setLives((prev) => prev + 1);
+  };
+
+  useEffect(() => {
+    if (gameWon) {
+      nextLevel();
+      const fact = marineFacts[Math.floor(Math.random() * marineFacts.length)];
+      setMarineFact(fact);
+    }
+  }, [gameWon]);
 
   useEffect(() => {
     if (!gameStarted) return;
@@ -167,110 +209,54 @@ const BelugaGame = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
-    const background = new Image();
-    background.src = backgroundImage;
+    const bg = new Image(); bg.src = backgroundImage;
+    const belugaImg = new Image(); belugaImg.src = belugaSprite;
+    const fishImg = new Image(); fishImg.src = fishSprite;
+    const trashImg = new Image(); trashImg.src = trashSprite;
+    const boatImg = new Image(); boatImg.src = boatSprite;
+    const heartImg = new Image(); heartImg.src = heartSprite;
 
-    const belugaImage = new Image();
-    belugaImage.src = belugaSprite;
+    const render = () => {
+      if (gameOver) return;
 
-    const fishImage = new Image();
-    fishImage.src = fishSprite;
-
-    const trashImage = new Image();
-    trashImage.src = trashSprite;
-
-    const boatImage = new Image();
-    boatImage.src = boatSprite;
-
-    const heartImage = new Image();
-    heartImage.src = heartSprite;
-
-    const gameLoop = () => {
-      if (gameOver || gameWon) return;
       ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+      ctx.drawImage(bg, 0, 0, canvasWidth, canvasHeight);
 
-      // Draw background
-      ctx.drawImage(background, 0, 0, canvasWidth, canvasHeight);
+      ctx.drawImage(belugaImg, belugaRef.current.x, belugaRef.current.y, gridSize, gridSize);
 
-      // Draw safe zones
-      ctx.fillStyle = "lightgreen";
-      safeZones.forEach((zone) => {
-        ctx.fillRect(zone.x, zone.y, zone.width, zone.height);
-      });
+      fishRef.current.forEach(f => ctx.drawImage(fishImg, f.x, f.y, gridSize, gridSize));
+      trashRef.current.forEach(t => ctx.drawImage(trashImg, t.x, t.y, gridSize, gridSize));
+      threatsRef.current.forEach(b => ctx.drawImage(boatImg, b.x, b.y, gridSize, gridSize));
+      powerUpsRef.current.forEach(p => ctx.drawImage(heartImg, p.x, p.y, gridSize, gridSize));
 
-      // Draw beluga
-      ctx.drawImage(belugaImage, belugaRef.current.x, belugaRef.current.y, gridSize, gridSize);
-
-      // Draw fish
-      fishRef.current.forEach((fish) => {
-        ctx.drawImage(fishImage, fish.x, fish.y, gridSize, gridSize);
-      });
-
-      // Draw trash
-      trashRef.current.forEach((trash) => {
-        ctx.drawImage(trashImage, trash.x, trash.y, gridSize, gridSize);
-      });
-
-      // Draw threats (boats)
-      threatsRef.current.forEach((threat) => {
-        ctx.drawImage(boatImage, threat.x, threat.y, gridSize, gridSize);
-      });
-
-      // Draw score
-      ctx.fillStyle = "white";
-      ctx.font = "20px Arial";
-      ctx.fillText(`Score: ${score}`, 10, 20);
-
-      // Draw lives as hearts
       for (let i = 0; i < lives; i++) {
-        ctx.drawImage(heartImage, 10 + i * 30, 30, 20, 20);
+        ctx.drawImage(heartImg, canvasWidth - (i + 1) * 40, 10, 30, 30);
       }
 
       moveThreats();
-      requestAnimationFrame(gameLoop);
+      requestAnimationFrame(render);
     };
 
-    gameLoop();
-  }, [gameStarted, gameOver]);
+    render();
 
-  useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [gameOver]);
+  }, [gameStarted, gameOver]);
 
   return (
-    <div>
-      {!gameStarted && (
-        <div className="instructions">
-          <h2>How to Play</h2>
-          <p>Use the W, A, S, D keys to move the beluga whale.</p>
-          <p>Collect fish 🐟 for points, avoid trash 🚮, and escape boats 🚤!</p>
-          <p>Use safe zones (green areas) to escape threats.</p>
-          <button onClick={resetGame} className="btn btn-primary">
-            Start Game
-          </button>
-        </div>
-      )}
-      {gameStarted && (
-        <canvas ref={canvasRef} width={canvasWidth} height={canvasHeight}></canvas>
-      )}
-      {gameOver && (
-        <div className="game-over">
-          <h1>Game Over</h1>
-          <p>Your Score: {score}</p>
-          <button onClick={resetGame} className="btn btn-primary">
-            Play Again
-          </button>
-        </div>
-      )}
-      {gameWon && (
-        <div className="game-won">
-          <h1>Congratulations!</h1>
-          <p>You collected all the fish and saved the beluga!</p>
-          <button onClick={resetGame} className="btn btn-primary">
-            Play Again
-          </button>
-        </div>
+    <div className="game-container">
+      {!gameStarted ? (
+        <button onClick={resetGame}>Start Game</button>
+      ) : (
+        <>
+          <canvas ref={canvasRef} width={canvasWidth} height={canvasHeight} />
+          <div className="hud">
+            <p>Score: {score}</p>
+            <p>Level: {level}</p>
+            {marineFact && <p className="fact">{marineFact}</p>}
+            {gameOver && <p className="game-over">Game Over</p>}
+          </div>
+        </>
       )}
     </div>
   );
